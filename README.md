@@ -1,5 +1,5 @@
-# LibWheelView
-The library of ViewPager.
+# LibWifi
+The library for wifi search or connect.
 
 # How to
 To get a Git project into your build:
@@ -17,7 +17,7 @@ allprojects {
 **Step 2**. Add the dependency<br>
 ```
 dependencies {
-    implementation 'com.github.rhinoSp:LibViewPager:v1.0.0'
+    implementation 'com.github.rhinoluo:LibWifi:v1.0.0'
 }
 ```
 
@@ -39,3 +39,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
