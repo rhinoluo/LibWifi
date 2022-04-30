@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+apply from: "pkg.gradle"
+
+android {
+    compileSdkVersion pkgCompileSdkVersion
+    defaultConfig {
+        minSdkVersion pkgMinSdkVersion
+        targetSdkVersion pkgTargetSdkVersion
+        versionCode apkVersionCode
+        versionName apkVersionName
+        applicationId "com.rhino.wifi.demo"
+
+        multiDexEnabled true
+    }
+    signingConfigs {
+        keystore {
+            storeFile file(signKeystorePath)
+            storePassword signKsPass
+            keyAlias signKeyAlias
+            keyPassword signKeyPass
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.keystore
+            //混淆
+            minifyEnabled false
+            //对齐操作，使得我们的程序在Android系统中运行得更快
+            zipAlignEnabled true
+            //移除无用的resource文件 必须和minifyEnabled一起使用
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.keystore
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.appcompat
+    implementation rootProject.ext.material
+    implementation rootProject.ext.constraintlayout
+
+    implementation project(path: ':libWifi')
+}

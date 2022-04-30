@@ -1,0 +1,33 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
+apply from: "aar.gradle"
+//jitpack要求
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.rhinoSp'//com.github.<用户名>(也就是你GtiHub上的地址)
+
+android {
+    compileSdkVersion pkgCompileSdkVersion
+    defaultConfig {
+        minSdkVersion pkgMinSdkVersion
+        targetSdkVersion pkgTargetSdkVersion
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.appcompat
+    implementation rootProject.ext.material
+    implementation rootProject.ext.constraintlayout
+    implementation rootProject.ext.rhinoLog
+}
